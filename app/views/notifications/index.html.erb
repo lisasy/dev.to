@@ -39,84 +39,52 @@
   }
 </script>
 
-<% if user_signed_in? %>
-  <div class="home" id="notifications-container">
-    <div class="side-bar">
-      <div class="crayons-card">
-        <header class="crayons-card__header">
-          <h3 class="crayons-card__title">Filter</h3>
-        </header>
-        <div class="crayons-card__body widget-body">
-          <section class="crayons-card__inner-section">
-            <% if @organizations.present? %>
-              <header class="crayons-card__subheader">
-                <h4 class="crayons-card__subheader__title">
-                  <%= @user.name %>
-                </h4>
-              </header>
-            <% end %>
-            <ul class="notifications-filter__list">
-              <li>
-                <a class="notifications-filter__list--item <%= "selected" if params[:filter].blank? %>" href="/notifications">
-                  All
-                  <div class="notifications-filter__icon">
-                    <%= inline_svg_tag("checkmark.svg", aria: true, class: "crayons-icon", title: "Checkmark") %>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a class="notifications-filter__list--item <%= "selected" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].blank? %>" href="/notifications/comments">
-                  Comments
-                  <div class="notifications-filter__icon">
-                    <%= inline_svg_tag("checkmark.svg", aria: true, class: "crayons-icon", title: "Checkmark") %>
-                  </div>
-                </a>
-              </li>
-              <li>
-              </li>
-                <a class="notifications-filter__list--item <%= "selected" if params[:filter].to_s.casecmp("posts").zero? && params[:org_id].blank? %>" href="/notifications/posts">
-                  Posts
-                  <div class="notifications-filter__icon">
-                    <%= inline_svg_tag("checkmark.svg", aria: true, class: "crayons-icon", title: "Checkmark") %>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </section>
-          <section class="crayons-card__inner-section">
-            <% if @organizations.present? %>
-              <% @organizations.each do |org| %>
-                <header class="crayons-card__subheader">
-                  <h4 class="crayons-card__subheader__title">
-                    <%= org.name %>
-                  </h4>
-                </header>
-                <ul class="notifications-filter__list">
-                  <li>
-                    <a class="notifications-filter__list--item <%= "selected" if params[:filter].to_s.casecmp("org").zero? && params[:org_id].to_i == org.id %>" href="/notifications/org/<%= org.id %>">
-                      All
-                      <div class="notifications-filter__icon">
-                        <%= inline_svg_tag("checkmark.svg", aria: true, class: "crayons-icon", title: "Checkmark") %>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="notifications-filter__list--item <%= "selected" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].to_i == org.id %>" href="/notifications/comments/<%= org.id %>">
-                      Comments
-                      <div class="notifications-filter__icon">
-                        <%= inline_svg_tag("checkmark.svg", aria: true, class: "crayons-icon", title: "Checkmark") %>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              <% end %>
-            <% end %>
-          </section>
-        </div>
-      </div>
-    </div>
-    <div class="articles-list" id="articles-list">
+<header class="crayons-layout flex items-center justify-between p-2 l:p-4 l:pb-0">
+  <h1>
+    Notifications
+  </h1>
+</header>
 
+<% if user_signed_in? %>
+  <div id="notifications-container" class="crayons-layout crayons-layout--3-cols">
+    <aside class="crayons-layout__sidebar-left">
+      <nav class="notification-nav">
+        <% if @organizations.present? %>
+          <header class="pl-2 mb-2">
+            <h4>
+              <%= @user.name %>
+            </h4>
+          </header>
+        <% end %>
+        <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].blank? %>" href="/notifications">
+          All
+        </a>
+        <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].blank? %>" href="/notifications/comments">
+          Comments
+        </a>
+        <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("posts").zero? && params[:org_id].blank? %>" href="/notifications/posts">
+          Posts
+        </a>
+      </nav>
+      <nav class="notification-nav">
+        <% if @organizations.present? %>
+          <% @organizations.each do |org| %>
+            <header class="pl-2 mb-2">
+              <h4>
+                <%= org.name %>
+              </h4>
+            </header>
+            <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("org").zero? && params[:org_id].to_i == org.id %>" href="/notifications/org/<%= org.id %>">
+              All
+            </a>
+            <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].to_i == org.id %>" href="/notifications/comments/<%= org.id %>">
+              Comments
+            </a>
+          <% end %>
+        <% end %>
+      </nav>
+    </aside>
+    <div id="articles-list" class="crayons-layout__content">
       <section class="notifications-filter__dropdown s:flex-col">
         <% if @organizations.present? %>
           <div class="p-2 s:inline-flex">
@@ -156,19 +124,16 @@
         </div>
       </section>
       <%= render "notifications_list", params: params %>
+
+      <% if @notifications.size >= @initial_page_size %>
+        <div class="load-more-wrapper">
+          <button id="load-more-button" type="button" class="crayons-btn crayons-btn--secondary w-100">
+            Load More
+          </button>
+        </div>
+      <% end %>
+
     </div>
-
-    <%# new or less active users that don't have a page worth of notifications
-        won't be shown the "load more" button %>
-    <% if @notifications.size >= @initial_page_size %>
-      <div class="load-more-wrapper">
-        <button id="load-more-button" type="button" class="crayons-btn crayons-btn--secondary">
-          Load More
-        </button>
-      </div>
-    <% end %>
-
-    <div class="side-bar sidebar-additional"></div>
   </div>
   <%= render "articles/fitvids" %>
 <% else %>

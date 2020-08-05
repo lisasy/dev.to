@@ -109,7 +109,7 @@ function initReactions() {
           var thisButt = this;
           document
             .getElementById('comment-form-for-' + thisButt.dataset.reactableId)
-            .classList.add('showing');
+            .classList.remove('hidden');
           thisButt.innerHTML = '';
           setTimeout(function () {
             document
