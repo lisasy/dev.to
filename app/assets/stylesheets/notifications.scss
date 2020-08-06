@@ -6,6 +6,7 @@
 .notification-item {
   display: grid;
   grid-row-gap: var(--su-2);
+  position: relative;
 }
 
 .notification-item--body {
@@ -44,6 +45,34 @@
 .notification-meta--timestamp {
   color: var(--base-80);
   font-size: var(--fs-s);
+}
+
+.notification-item--mod {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+}
+
+.notification-item--image-wrapper {
+  position: absolute;
+  top: 0;
+}
+
+.notification--tag-adjustment {
+  z-index: 10;
+
+  .notification-item--title {
+    background-color: var(--base-inverted);
+  }
+}
+
+.notification--tag-adjustment-reason {
+  padding-left: var(--su-6);
+}
+
+.notification-header--secondary {
+  font-size: var(--fs-base);
+  color: var(--base-80);
+  margin-bottom: var(--su-2);
 }
 
 .notification-nav {
