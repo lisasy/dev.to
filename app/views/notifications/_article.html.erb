@@ -14,7 +14,7 @@
   <% end %>
   <div class="notification-item--meta">
     <a href="<%= json_data["user"]["path"] %>">
-      <figure class="crayons-avatar crayons-avatar--xl mr-2">
+      <figure class="crayons-avatar crayons-avatar--l mr-2">
         <img src="<%= json_data["user"]["profile_image_90"] %>" alt="link to <%=
         json_data["user"]["username"] %>'s profile" class="crayons-avatar__image" />
       </figure>
@@ -36,11 +36,11 @@
   </div>
   <div class="notification-item--body">
     <a href="<%= json_data["article"]["path"] %>">
-      <div class="notification-new-post">
-        <h2 class="crayons-story__title fs-xl s:fs-2xl">
+      <div class="notification-item--content-container">
+        <h2 class="crayons-story__title fs-base mb-0 s:fs-2xl">
           <%= h(json_data["article"]["title"]) %>
         </h2>
-        <div class="crayons-story__tags">
+        <div class="crayons-story__tags mb-0">
           <% json_data["article"]["cached_tag_list_array"].each do |tag| %>
             <div class="crayons-tag">
               <span class="crayons-tag__prefix">

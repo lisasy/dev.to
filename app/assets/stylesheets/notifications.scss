@@ -4,48 +4,67 @@
 @import 'config/import';
 
 .notification-item {
+  border-radius: unset;
   display: grid;
   grid-row-gap: var(--su-2);
   position: relative;
-}
 
-.notification-item--body {
-  width: 100%;
+  &--body {
+    font-size: var(--fs-s);
+    color: var(--base-90);
+    width: 100%;
 
-  @media (min-width: $breakpoint-s) {
-    padding-left: calc(var(--su-8) + var(--su-4) / 2);
+    @media (min-width: $breakpoint-s) {
+      padding-left: calc(var(--su-8) + var(--su-4) / 2);
+    }
+  }
+
+  &--meta {
+    display: flex;
+    flex-direction: row;
+    font-size: var(--fs-s);
+
+    a {
+      color: var(--base-90);
+      font-weight: var(--fw-bold);
+    }
+  }
+
+  &--content-container {
+    border-radius: var(--radius);
+    border: 1px solid var(--base-20);
+    padding: var(--su-3);
   }
 }
 
-.notification-item--meta {
-  display: flex;
-  flex-direction: row;
-}
+.notification-meta {
 
-.notification-meta--title {
-  color: var(--base-80);
-}
+  &--title {
+    color: var(--base-70);
+  }
 
-.notification-meta--name {
-  font-weight: var(--fw-medium);
+  &--name {
+    font-weight: var(--fw-medium);
 
-  &:hover,
-  &:focus,
-  &:active {
-    color: var(--link-color-hover);
-    text-decoration: underline;
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--link-color-hover);
+      text-decoration: underline;
+    }
+  }
+
+  &--info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--timestamp {
+    color: var(--base-70);
+    font-size: var(--fs-xs);
   }
 }
 
-.notification-meta--info {
-  display: flex;
-  flex-direction: column;
-}
-
-.notification-meta--timestamp {
-  color: var(--base-80);
-  font-size: var(--fs-s);
-}
 
 .notification-item--mod {
   display: grid;
@@ -55,6 +74,10 @@
 .notification-item--image-wrapper {
   position: absolute;
   top: 0;
+}
+
+.notification-follower-row {
+  padding-left: calc(var(--su-5) + var(--su-7) / 2);
 }
 
 .notification--tag-adjustment {
@@ -393,23 +416,6 @@
                 lighten($blue, 57%)
               );
               border: 1px solid lighten($sky-blue, 17%);
-            }
-          }
-          .notification-new-post {
-            padding: 12px 10px;
-            margin-top: 10px;
-            border: 1px solid lighten($dark-gray, 18%);
-            border-radius: 3px;
-            color: var(--body-color);
-            position: relative;
-            .notification-new-post-title {
-              font-size: 1.7em;
-              word-wrap: break-word;
-              line-height: 1.06em;
-            }
-            .notification-new-post-tags {
-              margin-top: 6px;
-              @include themeable(color, theme-color, $medium-gray);
             }
           }
         }

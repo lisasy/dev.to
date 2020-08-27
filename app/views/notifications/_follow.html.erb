@@ -26,33 +26,40 @@
     <% json_data_array = notification["json_data"]["aggregated_siblings"] %>
     <div class="notification-item--meta">
       <a href="<%= json_data_array.last["path"] %>">
-        <figure class="crayons-avatar crayons-avatar--xl">
+        <figure class="crayons-avatar crayons-avatar--l">
           <img src="<%= json_data_array.last["profile_image_90"] %>" alt="link to <%= json_data_array.last["name"] %>'s profile" class="crayons-avatar__xl">
         </figure>
       </a>
       <div class="notification-meta-info">
         <span class="notification-meta-title">
           <a href="<%= json_data_array.first["path"] %>" class="notification-meta--name"><%= json_data_array.first["name"] %></a> and
-          <a href="<%= json_data_array.second["path"] %>" class="notification-meta--name"><%= json_data_array.second["name"] %></a> followed you!
+          <a href="<%= json_data_array.second["path"] %>" class="notification-meta--name"><%= json_data_array.second["name"] %></a> followed you.
         </span>
       </div>
     </div>
 
   <% else %>
+    <div class="notification-item--meta">
+      <a href="<%= first_notification["path"] %>">
+        <figure class="crayons-avatar crayons-avatar--l mr-2">
+          <img src="<%= notification.json_data["aggregated_siblings"][0]["profile_image_90"] %>" alt="link to <%= first_notification["name"] %>'s profile" class="crayons-avatar__image">
+        </figure>
+      </a>
+      <div class="notification-meta--info">
+        <span class="notification-meta--title">
+          <a href="<%= first_notification["path"] %>" class="notification-meta--name"><%= first_notification["name"] %></a>
+          and <%= notification.json_data["aggregated_siblings"].size - 1 %> others followed you.
+        </span>
+      </div>
+    </div>
 
-    <div class="follower-pic-row">
-      <% notification.json_data["aggregated_siblings"][0..10].each do |sibling| %>
+    <div class="notification-follower-row follower-pic-row">
+      <% notification.json_data["aggregated_siblings"][1..10].each do |sibling| %>
         <a href="<%= sibling["path"] %>">
-          <figure class="crayons-avatar crayons-avatar--xl">
+          <figure class="crayons-avatar crayons-avatar--l">
             <img src="<%= sibling["profile_image_90"] %>" alt="link to <%= sibling["name"] %>'s profile" class="crayons-avatar__image">
           </figure>
         </a>
       <% end %>
-    </div>
-    <div class="notification-meta--info">
-      <span class="notification-meta--title">
-        <a href="<%= first_notification["path"] %>" class="notification-meta--name"><%= first_notification["name"] %></a>
-        and <%= notification.json_data["aggregated_siblings"].size - 1 %> others followed you.
-      </span>
     </div>
   <% end %>
