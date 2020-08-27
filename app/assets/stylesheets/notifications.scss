@@ -38,7 +38,6 @@
 }
 
 .notification-meta {
-
   &--title {
     color: var(--base-70);
   }
@@ -64,7 +63,6 @@
     font-size: var(--fs-xs);
   }
 }
-
 
 .notification-item--mod {
   display: grid;
@@ -123,9 +121,9 @@
   color: var(--base-80);
 }
 
-.notification-item--footer {
-  border-top: 1px solid var(--base-20);
-}
+// .notification-item--footer {
+//   border-top: 1px solid var(--base-20);
+// }
 
 .notification-footer--body {
   font-size: var(--fs-xs);
@@ -133,9 +131,10 @@
 }
 
 .notification-comment--body {
-  border-left: 4px solid var(--accent-brand-lighter);
+  border-left: 2px solid var(--base-40);
+  font-size: var(--fs-s);
   padding-left: var(--su-3);
-  color: var(--base-80);
+  color: var(--base-90);
   margin-bottom: var(--su-2);
 }
 
@@ -180,8 +179,6 @@
     }
   }
 }
-
-
 
 .notification-comment--actions {
   align-items: center;
@@ -252,11 +249,7 @@
 }
 
 .reply-sent-notice {
-  @include themeable(
-    background,
-    theme-container-background,
-    $light-green
-  );
+  @include themeable(background, theme-container-background, $light-green);
   text-align: center;
   padding: 10px 0px;
   a {
@@ -470,7 +463,6 @@
             margin-left: 0.5rem;
           }
         }
-
       }
 
       .unseen {
