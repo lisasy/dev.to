@@ -68,6 +68,7 @@
     <meta name="twitter:description" content="<%= @article.description || "An article from the community" %>">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:widgets:new-embed-design" content="on">
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <% if @article.published %>
       <meta property="og:image" content="<%= article_social_image_url(@article) %>" />
       <meta name="twitter:image:src" content="<%= article_social_image_url(@article) %>">
@@ -182,25 +183,25 @@
           </div>
         </header>
 
-        <% if @collection %>
-          <%= render "articles/collection",
-                     rendered_article: @article,
-                     collection: @collection,
-                     articles: @collection_articles,
-                     position: :top %>
-        <% end %>
+        <div class="crayons-article__main">
+          <% if @collection %>
+            <%= render "articles/collection",
+                       rendered_article: @article,
+                       collection: @collection,
+                       articles: @collection_articles %>
+          <% end %>
 
-        <div class="crayons-article__body text-styles spec__body" data-article-id="<%= @article.id %>" id="article-body">
-          <%= @article.processed_html.html_safe %>
+          <div class="crayons-article__body text-styles spec__body" data-article-id="<%= @article.id %>" id="article-body">
+            <%= @article.processed_html.html_safe %>
+          </div>
+
+          <% if @article.long_markdown? && @collection %>
+            <%= render "articles/collection",
+                       rendered_article: @article,
+                       collection: @collection,
+                       articles: @collection_articles %>
+          <% end %>
         </div>
-
-        <% if @article.long_markdown? && @collection %>
-          <%= render "articles/collection",
-                     rendered_article: @article,
-                     collection: @collection,
-                     articles: @collection_articles,
-                     position: :bottom %>
-        <% end %>
       </article>
 
       <% if @article.long_markdown? || @organization %>
