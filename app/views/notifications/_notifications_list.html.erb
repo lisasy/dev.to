@@ -1,6 +1,6 @@
 <% @notifications.each do |notification| %>
   <div
-    class="notification-item crayons-card s:mb-4 p-4 <%= "unseen" unless notification.read? %>"
+    class="notification-item crayons-card s:mb-3 p-4 <%= "unseen" unless notification.read? %>"
     data-notification-id="<%= notification.id %>">
     <%= render notification.notifiable_type.downcase.to_s, notification: notification %>
   </div>

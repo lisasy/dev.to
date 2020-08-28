@@ -36,7 +36,7 @@
   </div>
   <a href="<%= json_data["article"]["path"] %>">
     <div class="notification-item--content-container">
-      <h2 class="crayons-story__title fs-base mb-0 s:fs-2xl">
+      <h2 class="crayons-story__title fs-base mb-0 s:fs-xl">
         <%= h(json_data["article"]["title"]) %>
       </h2>
       <div class="crayons-story__tags mb-0">
@@ -51,31 +51,29 @@
       </div>
     </div>
   </a>
+  <% cache "activity-published-article-reactions-#{@last_user_reaction}-#{json_data['article']['updated_at']}-#{json_data['article']['id']}" do %>
+    <div class="notification-item--reactions">
+      <button
+        class="crayons-reaction crayons-reaction--like notification-reaction--like reaction-button <%= Reaction.cached_any_reactions_for?(notification.mocked_object("article"), current_user, "like") ? "reacted" : "" %>"
+        data-reachable-id="<%= json_data["article"]["id"] %>"
+        data-category="like"
+        data-reachable-type="article"
+        >
+        <span class="crayons-reaction__icon crayons-reaction__icon--inactive">
+          <%= inline_svg_tag("heart.svg", aria: true, class: "crayons-icon", title: "heart") %>
+        </span>
+        <span class="crayons-reaction__icon crayons-reaction__icon--active">
+          <%= inline_svg_tag("heart-filled.svg", aria: true, class: "crayons-icon", title: "heart") %>
+        </span>
+      </button>
 
-    <% cache "activity-published-article-reactions-#{@last_user_reaction}-#{json_data['article']['updated_at']}-#{json_data['article']['id']}" do %>
-      <div class="notification-item--reactions">
-
-        <button
-          class="crayons-reaction crayons-reaction--like notification-reaction--like reaction-button <%= Reaction.cached_any_reactions_for?(notification.mocked_object("article"), current_user, "like") ? "reacted user-activated user-animated" : "" %>"
-          data-reachable-id="<%= json_data["article"]["id"] %>"
-          data-category="like"
-          data-reachable-type="article"
-          >
-          <span class="crayons-reaction__icon crayons-reaction__icon--inactive">
-            <%= inline_svg_tag("heart.svg", aria: true, class: "crayons-icon", title: "heart") %>
-          </span>
-          <span class="crayons-reaction__icon crayons-reaction__icon--active">
-            <%= inline_svg_tag("heart-filled.svg", aria: true, class: "crayons-icon", title: "heart") %>
-          </span>
+      <div class="notification-reaction--save">
+        <button class="crayons-btn crayons-btn--secondary crayons-btn--s reaction-button notification-reaction__save <%= Reaction.cached_any_reactions_for?(notification.mocked_object("article"), current_user, "readinglist") ? "reacted" : "" %>" data-reactable-id="<%= json_data["article"]["id"] %>" data-category="readinglist" data-reactable-type="Article">
+          <span class="bm-initial">Save</span>
+          <span class="bm-success">Saved</span>
         </button>
-
-        <div class="crayons-reaction--save">
-          <button class="crayons-btn crayons-btn--secondary crayons-btn--s reaction-button notification-reaction__save <%= Reaction.cached_any_reactions_for?(notification.mocked_object("article"), current_user, "readinglist") ? "reacted" : "" %>" data-reactable-id="<%= json_data["article"]["id"] %>" data-category="readinglist" data-reactable-type="Article">
-            <span class="bm-initial">Save</span>
-            <span class="bm-success">Saved</span>
-          </button>
-        </div>
-
       </div>
-    <% end %>
+
+    </div>
+  <% end %>
 <% end %>

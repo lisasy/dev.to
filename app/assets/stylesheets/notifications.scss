@@ -5,7 +5,7 @@
 
 
 :root {
-  --notification-padding-s: calc(var(--su-8) + var(--su-2) / 2);
+  --notification-padding-s: calc(var(--su-7) + var(--su-2) / 2);
 }
 
 .notification-item {
@@ -14,19 +14,27 @@
   grid-row-gap: var(--su-2);
   position: relative;
 
+  @media (min-width: $breakpoint-s) {
+    border-radius: var(--radius);
+  }
+
   &--body {
     font-size: var(--fs-s);
     color: var(--base-90);
     width: 100%;
 
     @media (min-width: $breakpoint-s) {
-      font-size: var(--fs-base);
+      border-radius: var(--radius);
       padding-left: var(--notification-padding-s);
     }
 
     a {
       color: var(--base-90);
       font-weight: var(--fw-bold);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -39,11 +47,14 @@
     a {
       color: var(--base-90);
       font-weight: var(--fw-bold);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     @media (min-width: $breakpoint-s) {
       align-items: center;
-      font-size: var(--fs-base);
     }
   }
 
@@ -56,6 +67,10 @@
       margin-left: var(--notification-padding-s);
     }
   }
+}
+
+.unseen {
+  background: var(--accent-brand-a10);
 }
 
 .notification-meta {
@@ -82,10 +97,6 @@
   &--timestamp {
     color: var(--base-70);
     font-size: var(--fs-xs);
-
-    @media (min-width: $breakpoint-s) {
-      font-size: var(--fs-s);
-    }
   }
 }
 
@@ -120,7 +131,7 @@
 .notification-item--footer {
 
   @media (min-width: $breakpoint-s) {
-    padding-left: var(--notification-padding-s);
+    margin-left: var(--notification-padding-s);
   }
 
   &--divided {
@@ -167,11 +178,18 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+
+  @media (min-width: $breakpoint-s) {
+    margin-left: var(--notification-padding-s);
+  }
 }
 
 .notification-reaction--like {
   .crayons-reaction__icon--active {
     display: none;
+    box-shadow: inset 0 0 0 2px var(--reaction-like-color);
+    background: var(--reaction-like-bg);
+    color: var(--reaction-like-color);
   }
 
   &.reacted {
@@ -189,13 +207,15 @@
     display: none;
   }
 
-  &.reacted {
-    .bm-initial {
-      display: none;
-    }
+  .reaction-button {
+    &.reacted {
+      .bm-initial {
+        display: none;
+      }
 
-    .bm-success {
-      display: block;
+      .bm-success {
+        display: block;
+      }
     }
   }
 }
@@ -219,6 +239,9 @@
   display: flex;
   justify-content: space-between;
   position: relative;
+  @media (min-width: $breakpoint-s) {
+    margin-left: var(--notification-padding-s);
+  }
 
   button {
     background: transparent;
