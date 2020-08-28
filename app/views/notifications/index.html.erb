@@ -39,7 +39,7 @@
   }
 </script>
 
-<header class="crayons-layout flex items-center justify-between p-2 l:p-4 l:pb-0">
+<header class="crayons-layout flex items-center justify-between hidden s:block p-2 l:p-4 l:pb-0">
   <h1>
     Notifications
   </h1>
@@ -48,83 +48,11 @@
 <% if user_signed_in? %>
   <div id="notifications-container" class="crayons-layout crayons-layout--3-cols">
     <aside class="crayons-layout__sidebar-left">
-      <nav class="notification-nav">
-        <% if @organizations.present? %>
-          <header class="pl-2 mb-2">
-            <h4>
-              <%= @user.name %>
-            </h4>
-          </header>
-        <% end %>
-        <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].blank? %>" href="/notifications">
-          All
-        </a>
-        <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].blank? %>" href="/notifications/comments">
-          Comments
-        </a>
-        <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("posts").zero? && params[:org_id].blank? %>" href="/notifications/posts">
-          Posts
-        </a>
-      </nav>
-      <nav class="notification-nav">
-        <% if @organizations.present? %>
-          <% @organizations.each do |org| %>
-            <header class="pl-2 mb-2">
-              <h4>
-                <%= org.name %>
-              </h4>
-            </header>
-            <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("org").zero? && params[:org_id].to_i == org.id %>" href="/notifications/org/<%= org.id %>">
-              All
-            </a>
-            <a class="crayons-link crayons-link--block <%= "crayons-link--current" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].to_i == org.id %>" href="/notifications/comments/<%= org.id %>">
-              Comments
-            </a>
-          <% end %>
-        <% end %>
-      </nav>
+      <%= render "notifications/nav_menu" %>
     </aside>
     <div id="articles-list" class="crayons-layout__content">
-      <section class="notifications-filter__dropdown s:flex-col">
-        <% if @organizations.present? %>
-          <div class="p-2 s:inline-flex">
-            <select id="notifications-filter__select" class="crayons-select">
-              <option value="/notifications"><%= @user.name %></option>
-              <% @organizations.each do |org| %>
-                <option value="/notifications/org/<%= org.id %>" <%= "selected" if params[:org_id].to_i == org.id %>><%= org.name %></option>
-              <% end %>
-            </select>
-          </div>
-        <% end %>
-
-        <div class="s:inline-flex">
-          <nav class="crayons-tabs notifications-filter__tabs <%= "hidden" if params[:org_id].present? %>">
-            <a class="crayons-tabs__item <%= "crayons-tabs__item--current" if params[:filter].blank? %>" href="/notifications">
-              All
-            </a>
-            <a class="crayons-tabs__item <%= "crayons-tabs__item--current" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].blank? %>" href="/notifications/comments">
-              Comments
-            </a>
-            <a class="crayons-tabs__item <%= "crayons-tabs__item--current" if params[:filter].to_s.casecmp("posts").zero? && params[:org_id].blank? %>" href="/notifications/posts">
-              Posts
-            </a>
-          </nav>
-          <% if @organizations.present? %>
-            <% @organizations.each do |org| %>
-              <nav class="crayons-tabs notifications-filter__tabs <%= "hidden" unless params[:org_id].to_i == org.id %>">
-                <a class="crayons-tabs__item <%= "crayons-tabs__item--current" if params[:filter].to_s.casecmp("org").zero? && params[:org_id].to_i == org.id %>" href="/notifications/org/<%= org.id %>">
-                  All
-                </a>
-                <a class="crayons-tabs__item <%= "crayons-tabs__item--current" if params[:filter].to_s.casecmp("comments").zero? && params[:org_id].to_i == org.id %>" href="/notifications/comments/<%= org.id %>">
-                  Comments
-                </a>
-              </nav>
-            <% end %>
-          <% end %>
-        </div>
-      </section>
+      <%= render "notifications/nav_menu_filter" %>
       <%= render "notifications_list", params: params %>
-
       <% if @notifications.size >= @initial_page_size %>
         <div class="load-more-wrapper">
           <button id="load-more-button" type="button" class="crayons-btn crayons-btn--secondary w-100">
@@ -132,7 +60,6 @@
           </button>
         </div>
       <% end %>
-
     </div>
   </div>
   <%= render "articles/fitvids" %>
