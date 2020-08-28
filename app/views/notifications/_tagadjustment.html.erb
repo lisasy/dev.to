@@ -3,23 +3,15 @@
     <% data = notification.json_data %>
     <% removal = data["adjustment_type"] == "removal" %>
     <header>
-      <h2>
+      <h2 class="fs-base s:fs-xl">
         Hey there 👋
       </h2>
-      <span class="notification-item--title">
+      <span class="notification-item--body pl-0">
         Moderators <%= removal ? "removed" : "added" %>  the
-        <span class="ff-accent fs-s"><a href="/t/<%= data["tag_name"] %>">#<%= data["tag_name"] %></a></span> tag <%= removal ? "from" : "to" %> your post
+        <span class="ff-monospace fs-s lh-tight"><a href="/t/<%= data["tag_name"] %>">#<%= data["tag_name"] %></a></span> tag <%= removal ? "from" : "to" %> your post
         <a href="<%= data["article"]["path"] %>"><%= h(data["article"]["title"]) %></a>.
       </span>
     </header>
-    <div class="notification--tag-adjustment-reason">
-      <h3 class="notification-header--secondary">
-        Reason for action
-      </h3>
-      <blockquote class="notification-comment--body">
-        <%= data["reason_for_adjustment"] %>
-      </blockquote>
-    </div>
   </div>
   <div class="notification-item--image-wrapper">
     <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--LnVw15KE--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://thepracticaldev.s3.amazonaws.com/uploads/user/profile_image/31047/af153cd6-9994-4a68-83f4-8ddf3e13f0bf.jpg"
@@ -27,11 +19,26 @@
   </div>
 </div>
 
-<p>
-  <%= removal ? "Certain tags have special submission guidelines, and mods need to adjust tags to best fit the community." : "Mods felt this tag represented your article." %>
-  <% if removal %>
-    Check out <a href="/tags">other popular tags</a> which may be more appropriate.
-  <% end %>
-  Thanks for being part of <%= community_name %>! If you feel like this mod action was a mistake, feel free to contact
-  <%= email_link %>. 🤗
-</p>
+<div class="notification--tag-adjustment-reason notification-item--content-container ml-0">
+  <h3 class="notification-header--secondary">
+    Reason for action
+  </h3>
+  <blockquote class="notification-comment--body">
+    <%= data["reason_for_adjustment"] %>
+  </blockquote>
+</div>
+
+<div class="notification-item--body pl-0">
+  <p>
+    <%= removal ? "Certain tags have special submission guidelines, and mods need to adjust tags to best fit the community." : "Mods felt this tag represented your article." %>
+    <% if removal %>
+        Check out <a href="/tags">other popular tags</a> which may be more appropriate.
+    <% end %>
+  </p>
+</div>
+<div class="notification-item--footer notification-item--footer--divided pl-0">
+  <p class="notification-footer--body pl-0">
+    Thanks for being part of <%= community_name %>! If you feel like this mod action was a mistake, feel free to contact
+    <%= email_link %>. 🤗
+  </p>
+</div>

@@ -15,7 +15,8 @@
     width: 100%;
 
     @media (min-width: $breakpoint-s) {
-      padding-left: calc(var(--su-8) + var(--su-4) / 2);
+      font-size: var(--fs-base);
+      padding-left: calc(var(--su-7) + var(--su-2) / 2);
     }
   }
 
@@ -34,6 +35,10 @@
     border-radius: var(--radius);
     border: 1px solid var(--base-20);
     padding: var(--su-3);
+
+    @media (min-width: $breakpoint-s) {
+      margin-left: calc(var(--su-7) + var(--su-2) / 2);
+    }
   }
 }
 
@@ -69,11 +74,6 @@
   grid-template-columns: 5fr 1fr;
 }
 
-.notification-item--image-wrapper {
-  position: absolute;
-  top: 0;
-}
-
 .notification-follower-row {
   padding-left: calc(var(--su-5) + var(--su-7) / 2);
 }
@@ -86,14 +86,11 @@
   }
 }
 
-.notification--tag-adjustment-reason {
-  padding-left: var(--su-6);
-}
-
 .notification-header--secondary {
-  font-size: var(--fs-base);
-  color: var(--base-80);
-  margin-bottom: var(--su-2);
+  font-size: var(--fs-s);
+  color: var(--base-90);
+  margin-bottom: var(--su-1);
+  font-family: var(--ff-monospace);
 }
 
 .notification-nav {
@@ -121,9 +118,17 @@
   color: var(--base-80);
 }
 
-// .notification-item--footer {
-//   border-top: 1px solid var(--base-20);
-// }
+.notification-item--footer {
+  @media (min-width: $breakpoint-s) {
+    padding-left: calc(var(--su-7) + var(--su-2) / 2);
+  }
+
+  &--divided {
+    padding-top: var(--su-4);
+    border-top: 1px solid var(--base-20);
+    margin-top: var(--su-2);
+  }
+}
 
 .notification-footer--body {
   font-size: var(--fs-xs);
@@ -177,6 +182,20 @@
     .bm-success {
       display: block;
     }
+  }
+}
+
+.notification-badge {
+  &--container {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &--image {
+    height: 100%;
+    width: 100%;
   }
 }
 

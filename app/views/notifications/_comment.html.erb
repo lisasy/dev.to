@@ -6,8 +6,7 @@
     <% cache "activity-profile-pic-#{json_data['user']['id']}-#{json_data['user']['profile_image_90']}" do %>
       <a href="<%= json_data["user"]["path"] %>">
         <figure class="crayons-avatar crayons-avatar--l mr-2">
-json_data["user"]["username"]
-                                                  %>'s profile" />
+          <img class="crayons-avatar__image" src="<%= json_data["user"]["profile_image_90"] %>" alt="link to <%= json_data["user"]["username"] %>'s profile">
         </figure>
       </a>
     <% end %>
