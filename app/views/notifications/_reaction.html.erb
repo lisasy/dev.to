@@ -18,9 +18,9 @@
           <%= notification.json_data["reaction"]["reactable"]["title"].blank? ? "your #{notification.json_data['reaction']['reactable_type'].downcase}" : sanitize(notification.json_data["reaction"]["reactable"]["title"]) %>
         </a>
 
-      <span class="reaction-images">
+      <span class="notification-reaction-inline">
           <% category = notification.json_data["reaction"]["category"] %>
-          with <%= image_tag(ReactionImage.new(category).path, class: "reaction-image", alt: "a #{category.humanize}") %>
+          with <%= image_tag(ReactionImage.new(category).path, class: "notification-reaction-inline__image", alt: "a #{category.humanize}") %>
         </span>
     </div>
 

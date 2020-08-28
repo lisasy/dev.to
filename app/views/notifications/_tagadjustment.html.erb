@@ -6,11 +6,11 @@
       <h2 class="fs-base s:fs-xl">
         Hey there 👋
       </h2>
-      <span class="notification-item--body pl-0">
+      <p class="notification-item--body pl-0">
         Moderators <%= removal ? "removed" : "added" %>  the
         <span class="ff-monospace fs-s lh-tight"><a href="/t/<%= data["tag_name"] %>">#<%= data["tag_name"] %></a></span> tag <%= removal ? "from" : "to" %> your post
         <a href="<%= data["article"]["path"] %>"><%= h(data["article"]["title"]) %></a>.
-      </span>
+      </p>
     </header>
   </div>
   <div class="notification-item--image-wrapper">

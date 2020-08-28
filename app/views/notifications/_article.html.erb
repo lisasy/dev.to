@@ -34,24 +34,23 @@
       </small>
     </div>
   </div>
-  <div class="notification-item--body">
-    <a href="<%= json_data["article"]["path"] %>">
-      <div class="notification-item--content-container">
-        <h2 class="crayons-story__title fs-base mb-0 s:fs-2xl">
-          <%= h(json_data["article"]["title"]) %>
-        </h2>
-        <div class="crayons-story__tags mb-0">
-          <% json_data["article"]["cached_tag_list_array"].each do |tag| %>
-            <div class="crayons-tag">
-              <span class="crayons-tag__prefix">
-                #
-              </span>
-              <%= tag %>
-            </div>
-          <% end %>
-        </div>
+  <a href="<%= json_data["article"]["path"] %>">
+    <div class="notification-item--content-container">
+      <h2 class="crayons-story__title fs-base mb-0 s:fs-2xl">
+        <%= h(json_data["article"]["title"]) %>
+      </h2>
+      <div class="crayons-story__tags mb-0">
+        <% json_data["article"]["cached_tag_list_array"].each do |tag| %>
+          <div class="crayons-tag">
+            <span class="crayons-tag__prefix">
+              #
+            </span>
+            <%= tag %>
+          </div>
+        <% end %>
       </div>
-    </a>
+    </div>
+  </a>
 
     <% cache "activity-published-article-reactions-#{@last_user_reaction}-#{json_data['article']['updated_at']}-#{json_data['article']['id']}" do %>
       <div class="notification-item--reactions">
@@ -79,5 +78,4 @@
 
       </div>
     <% end %>
-  </div>
 <% end %>

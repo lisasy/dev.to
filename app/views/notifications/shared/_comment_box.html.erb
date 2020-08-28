@@ -1,13 +1,20 @@
 <% cache "comment-box-#{@last_user_reaction}-#{@last_user_comment}-#{json_data['comment']['updated_at']}-#{json_data['comment']['id']}" do %>
   <% if json_data["comment"]["commentable"] %>
-    <div class="notification-comment--body">
+    <div class="notification-item--content-container">
+      <h2 class="crayons-story__title fs-base mb-1 s:fs-xl">
+        <a href="<%= json_data["comment"]["commentable"]["path"] %>">
+          <%= h(json_data["comment"]["commentable"]["title"]) %>
+        </a>
+      </h2>
       <% if json_data["comment"]["depth"] && json_data["comment"]["depth"] > 0 %>
         <a href="<%= json_data["comment"]["ancestors"].last["path"] %>" class="comment-text-header">
           re: <%= json_data["comment"]["ancestors"].last["title"] %>
         </a>
       <% end %>
-      <a href="<%= json_data["comment"]["path"] %>" class="comment-link-wrapper"></a>
-      <%= json_data["comment"]["processed_html"].html_safe %>
+      <div class="notification-comment--body">
+        <a href="<%= json_data["comment"]["path"] %>" class="comment-link-wrapper"></a>
+        <%= json_data["comment"]["processed_html"].html_safe %>
+      </div>
     </div>
     <div class="notification-comment--actions">
       <div>

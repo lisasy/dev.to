@@ -3,6 +3,11 @@
 @import 'functions';
 @import 'config/import';
 
+
+:root {
+  --notification-padding-s: calc(var(--su-8) + var(--su-2) / 2);
+}
+
 .notification-item {
   border-radius: unset;
   display: grid;
@@ -16,18 +21,29 @@
 
     @media (min-width: $breakpoint-s) {
       font-size: var(--fs-base);
-      padding-left: calc(var(--su-7) + var(--su-2) / 2);
+      padding-left: var(--notification-padding-s);
+    }
+
+    a {
+      color: var(--base-90);
+      font-weight: var(--fw-bold);
     }
   }
 
   &--meta {
     display: flex;
     flex-direction: row;
+    align-items: normal;
     font-size: var(--fs-s);
 
     a {
       color: var(--base-90);
       font-weight: var(--fw-bold);
+    }
+
+    @media (min-width: $breakpoint-s) {
+      align-items: center;
+      font-size: var(--fs-base);
     }
   }
 
@@ -37,7 +53,7 @@
     padding: var(--su-3);
 
     @media (min-width: $breakpoint-s) {
-      margin-left: calc(var(--su-7) + var(--su-2) / 2);
+      margin-left: var(--notification-padding-s);
     }
   }
 }
@@ -66,6 +82,10 @@
   &--timestamp {
     color: var(--base-70);
     font-size: var(--fs-xs);
+
+    @media (min-width: $breakpoint-s) {
+      font-size: var(--fs-s);
+    }
   }
 }
 
@@ -76,6 +96,10 @@
 
 .notification-follower-row {
   padding-left: calc(var(--su-5) + var(--su-7) / 2);
+
+  @media (min-width: $breakpoint-s) {
+    padding-left: var(--notification-padding-s);
+  }
 }
 
 .notification--tag-adjustment {
@@ -93,34 +117,10 @@
   font-family: var(--ff-monospace);
 }
 
-.notification-nav {
-  display: none;
-
-  @media (min-width: $breakpoint-s) {
-    display: block;
-    margin-bottom: var(--su-4);
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .crayons-link {
-    margin-bottom: var(--su-1);
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-.notification-nav header {
-  color: var(--base-80);
-}
-
 .notification-item--footer {
+
   @media (min-width: $breakpoint-s) {
-    padding-left: calc(var(--su-7) + var(--su-2) / 2);
+    padding-left: var(--notification-padding-s);
   }
 
   &--divided {
@@ -135,12 +135,32 @@
   color: var(--base-70);
 }
 
+.notification-post--title {}
+
 .notification-comment--body {
   border-left: 2px solid var(--base-40);
   font-size: var(--fs-s);
   padding-left: var(--su-3);
   color: var(--base-90);
   margin-bottom: var(--su-2);
+}
+
+.notification-reaction-inline {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  line-height: var(--lh-tight);
+
+  &__image {
+    margin-left: var(--su-2);
+    height: var(--su-4);
+    width: var(--su-4);
+
+    @media (min-width: $breakpoint-s) {
+      height: var(--su-6);
+      width: var(--su-6);
+    }
+  }
 }
 
 .notification-item--reactions {
@@ -162,11 +182,6 @@
       display: block;
     }
   }
-}
-
-.notification-item .reaction-image {
-  width: 24px;
-  height: 24px;
 }
 
 .notification-reaction--save {
@@ -267,228 +282,29 @@
   }
 }
 
-.reply-sent-notice {
-  @include themeable(background, theme-container-background, $light-green);
-  text-align: center;
-  padding: 10px 0px;
-  a {
-    display: inline-block;
-    background: $green;
-    color: white !important;
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
-}
-.notifications-index {
-  .home {
-    overflow: initial;
+.notification-nav {
+  display: none;
 
-    .articles-list {
-      .signup-cue {
-        hr {
-          margin: 30px auto 15px;
-        }
-        a.sign-up-link {
-          display: inline-block;
-          border: 1px solid $medium-gray;
-          padding: 4px 8px;
-          border-radius: 3px;
-          margin: 20px 6px;
-          img {
-            width: 18px;
-            vertical-align: -1px;
-          }
-        }
-      }
-      // TODO: [@forem/delightful]: Remove .signup-cue-advanced and .sloan
-      // from stylesheet since it does not appear to be used anywhere
-      .signup-cue-advanced {
-        text-align: left;
-        padding: 30px 25px;
-        .sloan {
-          height: calc(5vw + 200px);
-          margin: 10px auto 30px;
-          display: block;
-        }
-      }
-      .single-article {
-        .reaction-images {
-          display: inline-block;
-        }
-        .reaction-image {
-          width: 21px;
-          height: 21px;
-          vertical-align: -4px;
-        }
-        .content {
-          padding-bottom: 18px;
-          line-height: 1.35em;
+  @media (min-width: $breakpoint-s) {
+    display: block;
+    margin-bottom: var(--su-4);
 
-          &.notification-content {
-            a {
-              color: $sky-blue;
-              font-weight: 500;
-            }
-          }
-          &.reaction-content {
-            width: calc(100% - 145px);
-          }
-          &.badge-content {
-            margin: auto;
-            width: 98%;
-            display: block;
-            text-align: center;
-            .badge-title {
-              margin: 6px auto;
-              width: 90%;
-              font-size: 1.3em;
-            }
-            p.badge-description {
-              margin: 10px auto;
-              width: 90%;
-              @include themeable(color, theme-secondary-color, #666666);
-              &.milestone-emojis {
-                font-size: xx-large;
-                padding-top: 10px;
-                padding-bottom: 0px;
-              }
-            }
-            img.badge-image {
-              margin: 10px 0px 20px;
-              height: 150px;
-            }
-            img.milestone-gif {
-              margin: 10px 0px 10px;
-              border-radius: 8px;
-              width: 300px;
-            }
-            hr.minimal-divider {
-              width: 90px;
-              opacity: 0.4;
-              margin: 18px auto 22px;
-            }
-            p.badge-reward-message {
-              margin: 8px auto;
-              width: 90%;
-              color: var(--body-color);
-            }
-            p.badge-credit-message {
-              margin: 8px auto;
-              width: 100%;
-              color: var(--body-color);
-              font-size: 0.94em;
-              line-height: 1.35em;
-              strong a {
-                font-weight: 700;
-              }
-            }
-          }
-          .follow-action-button {
-            display: block;
-            color: white;
-            background: $sky-blue;
-            border: 2px solid $sky-blue;
-            border-radius: 3px;
-            font-size: 1.1em;
-            margin-top: 0.3em;
-            padding: 2px 10px;
-            min-height: 33px;
-            min-width: 150px;
-            &.following-butt {
-              background: $sky-blue;
-              color: white;
-            }
-            &:hover {
-              border: 2px solid darken($sky-blue, 5%);
-            }
-            &.badge-button {
-              margin-bottom: 12px;
-              display: inline-block;
-            }
-          }
-          .mod-instructions {
-            font-size: 0.9em;
-            background: darken($light-gray, 1%);
-            border: 1px solid darken($light-gray, 12%);
-            width: 80%;
-            padding: 10px 0px 10px 35px;
-            border-radius: 3px;
-          }
-          .notification-comment-reacted-link {
-            padding: 2px 6px;
-            border: 1px solid lighten($medium-gray, 9%);
-            border-radius: 3px;
-            max-width: 100%;
-            display: inline-block;
-            margin-bottom: 3px;
-            &:hover {
-              @include themeable(
-                background,
-                theme-container-background-hover,
-                lighten($blue, 57%)
-              );
-              border: 1px solid lighten($sky-blue, 17%);
-            }
-          }
-        }
-        .comment-link-wrapper {
-          display: block;
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-        }
-        .comment-text {
-          padding: 10px;
-          margin-top: 10px;
-          border: 1px solid lighten($dark-gray, 18%);
-          border-radius: 3px;
-          color: var(--body-color);
-          position: relative;
-          .comment-text-header {
-            display: block;
-            padding: 5px 10px;
-            margin-left: -10px;
-            margin-top: -10px;
-            margin-bottom: 8px;
-            border-bottom: 1px solid lighten($dark-gray, 18%);
-            width: 100%;
-            font-weight: bold;
-            font-size: 0.76em;
-            position: relative;
-            z-index: 6;
-            border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            @include themeable(
-              background,
-              theme-container-accent-background,
-              lighten($lightest-gray, 1%)
-            );
-          }
-          &:hover {
-            border: 1px solid $black;
-          }
-          img {
-            max-width: 100%;
-            max-height: 400px;
-          }
-          blockquote {
-            border-left: calc(0.2vw + 2px) solid $dark-gray;
-            padding: 0.1% 6% 0.1% 2%;
-            margin-left: 0.5rem;
-          }
-        }
-      }
-
-      .unseen {
-        background: var(--accent-brand-lighter);
-      }
+    &:last-child {
+      margin-bottom: 0;
     }
   }
+
+  .crayons-link {
+    margin-bottom: var(--su-1);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.notification-nav header {
+  color: var(--base-80);
 }
 
 .notifications-filter__dropdown {
