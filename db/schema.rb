@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_045600) do
+ActiveRecord::Schema.define(version: 2020_09_02_204028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_08_28_045600) do
     t.string "utm_term"
     t.index ["to"], name: "index_ahoy_messages_on_to"
     t.index ["token"], name: "index_ahoy_messages_on_token"
+    t.index ["user_id", "mailer"], name: "index_ahoy_messages_on_user_id_and_mailer"
     t.index ["user_id", "user_type"], name: "index_ahoy_messages_on_user_id_and_user_type"
   end
 
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(version: 2020_08_28_045600) do
     t.index ["public_reactions_count"], name: "index_articles_on_public_reactions_count", order: :desc
     t.index ["published"], name: "index_articles_on_published"
     t.index ["published_at"], name: "index_articles_on_published_at"
+    t.index ["slug", "user_id"], name: "index_articles_on_slug_and_user_id", unique: true
     t.index ["slug"], name: "index_articles_on_slug"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
