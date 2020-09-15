@@ -3,6 +3,7 @@
 <% cache "broadcast-html-#{notification.json_data['broadcast']['title']}" do %>
   <a href="<%= json_data["user"]["path"] %>">
     <figure class="crayons-avatar crayons-avatar--l mr-2">
+      <img class="crayons-avatar__image" src="<%= Images::Profile.call(user.profile_image_url) %>" alt="link to <%= json_data["user"]["username"] %>'s profile">
       <img class="crayons-avatar__image" src="<%= ProfileImage.new(user).get %>"
       alt="link to <%= json_data["user"]["username"] %>'s profile" />
     </figure>
