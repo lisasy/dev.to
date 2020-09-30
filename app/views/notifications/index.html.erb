@@ -40,11 +40,11 @@
 </script>
 
 <% if user_signed_in? %>
-  <div class="home" id="notifications-container">
-    <div class="side-bar">
+  <div id="notifications-container" class="crayons-layout crayons-layout--limited crayons-layout--2-cols">
+    <div class="crayons-layout__sidebar-left">
       <%= render "notifications/nav_menu" %>
     </div>
-    <div class="articles-list" id="articles-list">
+    <div id="articles-list" class="articles-list crayons-layout__content">
       <%= render "notifications/nav_menu_filter" %>
       <%= render "notifications_list", params: params %>
     </div>
