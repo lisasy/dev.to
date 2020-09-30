@@ -4,6 +4,26 @@
 @import 'config/import';
 
 .notification-item {
+  padding: var(--su-3) var(--su-4);
+
+  @media (max-width: $breakpoint-s) {
+    padding: var(--su-4);
+  }
+}
+
+.notification__meta {
+  color: var(--base-90);
+  display: flex;
+  grid-gap: var(--su-2);
+
+  a {
+    color: var(--base-90);
+    font-weight: var(--fw-medium);
+  }
+}
+
+// Reactions
+.notification-item {
   .reaction-images {
     display: inline-block;
   }

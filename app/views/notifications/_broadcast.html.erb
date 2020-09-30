@@ -1,9 +1,9 @@
 <% json_data = notification.json_data %>
 <% user = User.find_by(id: json_data["user"]["id"]) %>
 <% cache "broadcast-html-#{notification.json_data['broadcast']['title']}" do %>
-  <a href="<%= json_data["user"]["path"] %>" class="small-pic-link-wrapper">
-    <div class="small-pic">
-      <img src="<%= Images::Profile.call(user.profile_image_url) %>" alt="link to <%= json_data["user"]["username"] %>'s profile">
+  <a href="<%= json_data["user"]["path"] %>">
+    <div class="crayons-avatar crayons-avatar--l">
+      <img src="<%= Images::Profile.call(user.profile_image_url) %>" class="crayons-avatar__image" alt="link to <%= json_data["user"]["username"] %>'s profile">
     </div>
   </a>
   <div class="content notification-content broadcast-content" id="<%= sanitized_broadcast_id(json_data["broadcast"]["title"]) %>">
