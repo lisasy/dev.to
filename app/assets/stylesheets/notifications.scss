@@ -3,6 +3,87 @@
 @import 'functions';
 @import 'config/import';
 
+.notification-item {
+  .reaction-images {
+    display: inline-block;
+  }
+  .reaction-image {
+    width: 21px;
+    height: 21px;
+    vertical-align: -4px;
+  }
+  .comment-actions {
+    position: relative;
+    button {
+      background: transparent;
+      border: 0px;
+      margin-top: 5px;
+      margin-left: -5px;
+      margin-right: 3px;
+      height: 30px;
+      width: 45px;
+      padding: 3px 0px;
+      overflow-y: hidden;
+      -webkit-appearance: none;
+      .reacted-emoji {
+        display: none;
+      }
+      &.readinglist-button {
+        background: darken($purple, 26%);
+        color: white;
+        font-family: $helvetica-condensed;
+        height: auto;
+        width: auto;
+        padding: 3px 7px;
+        display: inline-block;
+        vertical-align: 5px;
+        font-size: 17px;
+        border-radius: 3px;
+        float: right;
+        img {
+          opacity: 1;
+        }
+        &.reacted {
+          vertical-align: 0px;
+          padding: 3px 7px 1px;
+        }
+      }
+      &.reacted {
+        background: transparent;
+        .reacted-emoji {
+          display: inline;
+        }
+        .reaction-button-text {
+          display: none;
+        }
+        img {
+          display: none;
+        }
+      }
+    }
+    img {
+      height: 25px;
+      width: 25px;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .toggle-reply-form {
+      position: absolute;
+      right: 5px;
+      bottom: 8px;
+      font-weight: 300;
+      font-family: $helvetica-condensed;
+      font-stretch: condensed;
+      color: $bold-blue;
+      &.already-replied-link {
+        color: $green;
+      }
+    }
+  }
+}
+
 .notifications-index {
   .home {
     overflow: initial;
@@ -40,14 +121,6 @@
         }
       }
       .single-article {
-        .reaction-images {
-          display: inline-block;
-        }
-        .reaction-image {
-          width: 21px;
-          height: 21px;
-          vertical-align: -4px;
-        }
         .content {
           padding-bottom: 18px;
           line-height: 1.35em;
@@ -248,76 +321,6 @@
             border-left: calc(0.2vw + 2px) solid $dark-gray;
             padding: 0.1% 6% 0.1% 2%;
             margin-left: 0.5rem;
-          }
-        }
-        .comment-actions {
-          position: relative;
-          button {
-            background: transparent;
-            border: 0px;
-            margin-top: 5px;
-            margin-left: -5px;
-            margin-right: 3px;
-            height: 30px;
-            width: 45px;
-            padding: 3px 0px;
-            overflow-y: hidden;
-            -webkit-appearance: none;
-            .reacted-emoji {
-              display: none;
-            }
-            &.readinglist-button {
-              background: darken($purple, 26%);
-              color: white;
-              font-family: $helvetica-condensed;
-              height: auto;
-              width: auto;
-              padding: 3px 7px;
-              display: inline-block;
-              vertical-align: 5px;
-              font-size: 17px;
-              border-radius: 3px;
-              float: right;
-              img {
-                opacity: 1;
-              }
-              &.reacted {
-                vertical-align: 0px;
-                padding: 3px 7px 1px;
-              }
-            }
-            &.reacted {
-              background: transparent;
-              .reacted-emoji {
-                display: inline;
-              }
-              .reaction-button-text {
-                display: none;
-              }
-              img {
-                display: none;
-              }
-            }
-          }
-          img {
-            height: 25px;
-            width: 25px;
-            opacity: 0.7;
-            &:hover {
-              opacity: 1;
-            }
-          }
-          .toggle-reply-form {
-            position: absolute;
-            right: 5px;
-            bottom: 8px;
-            font-weight: 300;
-            font-family: $helvetica-condensed;
-            font-stretch: condensed;
-            color: $bold-blue;
-            &.already-replied-link {
-              color: $green;
-            }
           }
         }
         .reply-sent-notice {

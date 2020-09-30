@@ -53,12 +53,11 @@
         won't be shown the "load more" button %>
     <% if @notifications.size >= @initial_page_size %>
       <div class="load-more-wrapper">
-        <button id="load-more-button" type="button" class="crayons-btn crayons-btn--secondary">
+        <button id="load-more-button" type="button" class="crayons-btn crayons-btn--secondary w-100">
           Load More
         </button>
       </div>
     <% end %>
-
     <div class="side-bar sidebar-additional"></div>
   </div>
   <%= render "articles/fitvids" %>
