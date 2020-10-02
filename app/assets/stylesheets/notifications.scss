@@ -5,11 +5,13 @@
 
 .notification__item {
   display: grid;
-  grid-row-gap: var(--su-3);
   padding: var(--su-3) var(--su-4);
+  border-radius: 0;
 
-  @media (max-width: $breakpoint-s) {
+  @media (min-width: $breakpoint-s) {
     padding: var(--su-4);
+    grid-row-gap: var(--su-3);
+    border-radius: var(--radius);
   }
 }
 
@@ -71,6 +73,30 @@
       color: var(--link-brand-color);
       text-decoration: underline;
     }
+  }
+}
+
+.notification__badge {
+  display: flex;
+  flex-direction: column;
+  grid-gap: var(--su-4);
+  width: 65%;
+  margin: var(--su-4) auto;
+  text-align: center;
+
+  &-image-container {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 100%;
+    padding: var(--su-4);
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  &-image {
+    height: 100%;
+    width: 100%;
   }
 }
 

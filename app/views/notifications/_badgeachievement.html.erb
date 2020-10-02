@@ -1,30 +1,42 @@
 <% json_data = notification.json_data %>
-<div class="content notification-content badge-content">
-  <% cache "activity-badge-reward-#{json_data['badge_achievement']['badge_id']}" do %>
-    <div class="badge-title">
-      You received the <strong><%= sanitize(json_data["badge_achievement"]["badge"]["title"]) %></strong> badge
-    </div>
-    <p class="badge-description">
-      <%= json_data["badge_achievement"]["badge"]["description"] %>
+<% user = User.find_by(id: json_data["user"]["id"]) %>
+<% cache "activity-badge-reward-#{json_data['badge_achievement']['badge_id']}" do %>
+
+  <div class="notification__meta">
+    <a href="<%= json_data["user"]["path"] %>">
+      <figure class="crayons-avatar crayons-avatar--l">
+        <img class="crayons-avatar__image" src="<%= json_data["user"]["profile_image_90"] %>"
+        alt="link to <%= json_data["user"]["username"] %>'s profile" />
+      </figure>
+    </a>
+    <a href="<%= json_data["user"]["path"] %>">
+      You
+    </a> received the <%= sanitize(json_data["badge_achievement"]["badge"]["title"]) %> badge.
+  </div>
+
+  <div class="notification__body">
+    <section class="notification__badge">
+      <div class="notification__badge-image-container">
+optimized_image_url(json_data["badge_achievement"]["badge"]["badge_image_url"],
+                            width: 250)
+%>" alt="<%= json_data["badge_achievement"]["badge"]["title"] %>">
+      </div>
+      <p class="badge-description">
+        <%= json_data["badge_achievement"]["badge"]["description"] %>
+      </p>
+      <p>
+        <%= json_data["badge_achievement"]["rewarding_context_message"].html_safe %>
+      </p>
+
+      <a href="<%= json_data["user"]["path"] %>">
+        <button class="crayons-btn follow-action-button badge-button">
+          Visit my profile
+        </button>
+      </a>
+    </section>
+
+    <p class="notification__body">
+      You also get <a href="/credits">5 new credits</a> to use for <a href="/listings">community listings</a> if you have anything you'd like to promote. 🎉 <a href="<%= about_listings_url %>">Learn more about Listings</a>
     </p>
-    <img class="badge-image" src="<%= optimized_image_url(json_data["badge_achievement"]["badge"]["badge_image_url"], width: 250) %>" alt="<%= json_data["badge_achievement"]["badge"]["title"] %>">
-  <% end %>
-  <p class="badge-reward-message">
-    <em>
-      <%= json_data["badge_achievement"]["rewarding_context_message"].html_safe %>
-    </em>
-  </p>
-  <a href="<%= json_data["user"]["path"] %>">
-    <button class="cta follow-action-button badge-button">
-      CHECK YOUR PROFILE
-    </button>
-  </a>
-  <hr class="minimal-divider" />
-  <p class="badge-credit-message">
-    You also get <strong><a href="/credits">5 new credits</a></strong> to use for <strong><a href="/listings">community listings</a></strong><br />
-    if you have anything you'd like to promote. 🎉
-  </p>
-  <p class="badge-credit-message">
-    <strong><a href="<%= about_listings_url %>">More information about listings<a></strong>
-  </p>
-</div>
+  </div>
+<% end %>
