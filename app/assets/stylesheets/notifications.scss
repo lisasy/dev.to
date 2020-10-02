@@ -3,7 +3,9 @@
 @import 'functions';
 @import 'config/import';
 
-.notification-item {
+.notification__item {
+  display: grid;
+  grid-row-gap: var(--su-3);
   padding: var(--su-3) var(--su-4);
 
   @media (max-width: $breakpoint-s) {
@@ -18,12 +20,67 @@
 
   a {
     color: var(--base-90);
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-bold);
+
+    &:hover {
+      color: var(--link-brand-color);
+      text-decoration: underline;
+    }
+  }
+
+  &--moderator {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
   }
 }
 
+.notification__source {
+  border-radius: var(--radius);
+  border: 1px solid var(--base-20);
+  padding: var(--su-3);
+
+  &-header {
+    font-size: var(--fs-base);
+    color: var(--base-90);
+    margin-bottom: var(--su-1);
+  }
+
+  &-body {
+    border-left: 2px solid var(--base-40);
+    font-size: var(--fs-base);
+    padding-left: var(--su-3);
+    color: var(--base-90);
+    margin-bottom: var(--su-2);
+  }
+}
+
+.notification__body {
+  p {
+    margin-bottom: var(--su-2);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: var(--base-90);
+    font-weight: var(--fw-bold);
+    &:hover {
+      color: var(--link-brand-color);
+      text-decoration: underline;
+    }
+  }
+}
+
+.notification__footer {
+  font-size: var(--fs-s);
+  color: var(--base-80);
+}
+
 // Reactions
-.notification-item {
+.notification__item {
   .reaction-images {
     display: inline-block;
   }

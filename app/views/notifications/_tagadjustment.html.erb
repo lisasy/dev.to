@@ -1,28 +1,43 @@
-<div class="small-pic">
-  <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--LnVw15KE--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://thepracticaldev.s3.amazonaws.com/uploads/user/profile_image/31047/af153cd6-9994-4a68-83f4-8ddf3e13f0bf.jpg"
-       alt="Sloan, the sloth mascot">
-</div>
-<div class="content notification-content comment-content">
+<div class="notification__meta notification__meta--moderator">
   <% data = notification.json_data %>
   <% removal = data["adjustment_type"] == "removal" %>
-  Hey there 👋
-  <br /><br />
-  Moderators <%= removal ? "removed" : "added" %>  the
-  <b><a href="/t/<%= data["tag_name"] %>" style="font-weight: 900">#<%= data["tag_name"] %></a></b> tag <%= removal ? "from" : "to" %> your post
-  <a href="<%= data["article"]["path"] %>"><%= h(data["article"]["title"]) %></a>.
-  <br /><br />
-  <%= removal ? "Certain tags have special submission guidelines, and mods need to adjust tags to best fit the community." : "Mods felt this tag represented your article." %>
-  <br /><br />
-  <div class="comment-text">
-    <div style="font-size:0.8em;margin-top: -3px;font-weight: 900;margin-bottom: 5px;">Reason for action</div>
-    <%= data["reason_for_adjustment"] %>
+  <header>
+    <h2 class="fs-base s:fs-xl">
+      Hey there 👋
+    </h2>
+    <p>
+      Moderators <%= removal ? "removed" : "added" %>  the
+      <span class="ff-monospace lh-tight"><a href="/t/<%= data["tag_name"] %>">#<%= data["tag_name"] %></a></span> tag <%= removal ? "from" : "to" %> your post
+      <a href="<%= data["article"]["path"] %>"><%= h(data["article"]["title"]) %></a>.
+    </p>
+  </header>
+  <div class="notification__item--image-wrapper">
+    <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--LnVw15KE--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://thepracticaldev.s3.amazonaws.com/uploads/user/profile_image/31047/af153cd6-9994-4a68-83f4-8ddf3e13f0bf.jpg"
+        alt="Sloan, the sloth mascot">
   </div>
-  <br />
-  <% if removal %>
-    Check out <a href="/tags">other popular tags</a> which may be more appropriate
-  <% end %>
-  <br><br />
-  Thanks for being part of <%= community_name %>! If you feel like this mod action was a mistake, feel free to contact
-  <%= email_link %>. 🤗
-  <br /><br />
+</div>
+
+<div class="notification__source notification__source--tag-adjustment">
+  <h3 class="notification__source-header">
+    Reason for action
+  </h3>
+  <blockquote class="notification__source-body">
+    <%= data["reason_for_adjustment"] %>
+  </blockquote>
+</div>
+
+<div class="notification__body">
+  <p>
+    <%= removal ? "Certain tags have special submission guidelines, and mods need to adjust tags to best fit the community." : "Mods felt this tag represented your article." %>
+    <% if removal %>
+      Check out <a href="/tags">other popular tags</a> which may be more appropriate.
+    <% end %>
+  </p>
+  <p>
+    Thanks for being part of <%= community_name %>! If you feel like this mod action was a mistake, feel free to contact
+    <%= email_link %>. 🤗
+  </p>
+</div>
+
+<div class="notification__footer notification__footer--divider">
 </div>
