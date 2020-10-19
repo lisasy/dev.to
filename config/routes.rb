@@ -176,6 +176,7 @@ Rails.application.routes.draw do
           get :users
           get :organizations
         end
+        resources :readinglist, only: [:index]
         resources :webhooks, only: %i[index create show destroy]
 
         resources :listings, only: %i[index show create update]
@@ -193,6 +194,8 @@ Rails.application.routes.draw do
             get :cache
           end
         end
+
+        resources :profile_images, only: %i[show], param: :username
       end
     end
 
@@ -223,10 +226,7 @@ Rails.application.routes.draw do
     end
     resources :comment_mutes, only: %i[update]
     resources :users, only: %i[index], defaults: { format: :json } # internal API
-    resources :users, only: %i[update] do
-      resource :twitch_stream_updates, only: %i[show create]
-    end
-    resources :twitch_live_streams, only: :show, param: :username
+    resources :users, only: %i[update]
     resources :reactions, only: %i[index create]
     resources :response_templates, only: %i[index create edit update destroy]
     resources :feedback_messages, only: %i[index create]
@@ -328,7 +328,6 @@ Rails.application.routes.draw do
     post "/join_chat_channel" => "chat_channel_memberships#join_channel"
     delete "/messages/:id" => "messages#destroy"
     patch "/messages/:id" => "messages#update"
-    get "/live/:username" => "twitch_live_streams#show"
     get "/internal", to: redirect("/admin")
     get "/internal/:path", to: redirect("/admin/%{path}")
 
@@ -362,7 +361,6 @@ Rails.application.routes.draw do
 
     # Settings
     post "users/update_language_settings" => "users#update_language_settings"
-    post "users/update_twitch_username" => "users#update_twitch_username"
     post "users/join_org" => "users#join_org"
     post "users/leave_org/:organization_id" => "users#leave_org", :as => :users_leave_org
     post "users/add_org_admin" => "users#add_org_admin"

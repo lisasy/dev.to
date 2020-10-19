@@ -5,6 +5,10 @@ module Constants
         description: "Can users sign up with only email and password?",
         placeholder: ""
       },
+      allow_email_password_login: {
+        description: "Can users login using email and password?",
+        placeholder: ""
+      },
       authentication_providers: {
         description: "How can users sign in?",
         placeholder: ""
@@ -79,6 +83,14 @@ module Constants
         description: "Email address",
         placeholder: ""
       },
+      experience_low: {
+        description: "The label for the bottom of the experience level range of a post",
+        placeholder: "Total Newbies"
+      },
+      experience_high: {
+        description: "The label for the top of the experience level range of a post",
+        placeholder: "Senior Devs"
+      },
       facebook_key: {
         description:
           "The \"App ID\" portion of the Basic Settings section of the App page on the Facebook Developer Portal",
@@ -121,6 +133,10 @@ module Constants
       health_check_token: {
         description: "Used to authenticate with your health check endpoints.",
         placeholder: "a secure token"
+      },
+      invite_only_mode: {
+        description: "Only users invited by email can join this community.",
+        placeholder: ""
       },
       jobs_url: {
         description: "URL of the website where open positions are posted",
@@ -215,6 +231,14 @@ module Constants
         description: "Determines the mininum for the periodic email digest",
         placeholder: 2
       },
+      recaptcha_site_key: {
+        description: "Site key for Google reCAPTCHA, used for reporting abuse.",
+        placeholder: "..."
+      },
+      recaptcha_secret_key: {
+        description: "Secret key for Google reCAPTCHA, used for reporting abuse.",
+        placeholder: "..."
+      },
       right_navbar_svg_icon: {
         description: "The SVG icon used to expand the right navbar navigation menu. Should be a max of 24x24px.",
         placeholder: "<svg ...></svg>"
@@ -278,6 +302,10 @@ module Constants
       },
       twitter_secret: {
         description: "The \"API secret key\" portion of consumer keys in the Twitter developer portal.",
+        placeholder: ""
+      },
+      video_encoder_key: {
+        description: "Secret key used to allow AWS video encoding through the VideoStatesController",
         placeholder: ""
       }
       # Dynamic values ommitted: configurable_rate_limits and social_media_handles

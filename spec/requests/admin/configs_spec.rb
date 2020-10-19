@@ -61,6 +61,12 @@ RSpec.describe "/admin/config", type: :request do
                                           confirmation: confirmation_message }
           expect(SiteConfig.health_check_token).to eq token
         end
+
+        it "sets video_encoder_key" do
+          post "/admin/config", params: { site_config: { video_encoder_key: "123abc" },
+                                          confirmation: confirmation_message }
+          expect(SiteConfig.video_encoder_key).to eq("123abc")
+        end
       end
 
       describe "Authentication" do
@@ -119,6 +125,20 @@ RSpec.describe "/admin/config", type: :request do
         it "updates the staff_user_id" do
           post "/admin/config", params: { site_config: { staff_user_id: 22 }, confirmation: confirmation_message }
           expect(SiteConfig.staff_user_id).to eq(22)
+        end
+
+        it "updates the experience_low" do
+          experience_low = "Noobs"
+          post "/admin/config", params: { site_config: { experience_low: experience_low },
+                                          confirmation: confirmation_message }
+          expect(SiteConfig.experience_low).to eq(experience_low)
+        end
+
+        it "updates the experience_high" do
+          experience_high = "Advanced Peeps"
+          post "/admin/config", params: { site_config: { experience_high: experience_high },
+                                          confirmation: confirmation_message }
+          expect(SiteConfig.experience_high).to eq(experience_high)
         end
       end
 
@@ -550,6 +570,17 @@ RSpec.describe "/admin/config", type: :request do
           post "/admin/config", params: { site_config: { spam_trigger_terms: spam_trigger_terms },
                                           confirmation: confirmation_message }
           expect(SiteConfig.spam_trigger_terms).to eq(["hey", "pokemon go hack"])
+        end
+
+        it "updates recaptcha_site_key and recaptcha_secret_key" do
+          site_key = "hi-ho"
+          secret_key = "lets-go"
+          post "/admin/config", params: {
+            site_config: { recaptcha_site_key: site_key, recaptcha_secret_key: secret_key },
+            confirmation: confirmation_message
+          }
+          expect(SiteConfig.recaptcha_site_key).to eq site_key
+          expect(SiteConfig.recaptcha_secret_key).to eq secret_key
         end
       end
 
